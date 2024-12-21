@@ -1,0 +1,66 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Users {
+  id         String     @id @default(uuid())
+  firstName  String
+  lastName   String
+  email      String     @unique
+  phone      String
+  password   String
+  profileImg String?
+  emailToken String?
+  isBlocked  Boolean    @default(false)
+  isVerified Boolean    @default(false)
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime?  @updatedAt
+  sessions   Sessions[]
+  photo      Photo[]
+  comment    Comment[]
+
+  @@map("users")
+}
+
+model Sessions {
+  id           String   @id @default(uuid())
+  sessionToken String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  user         Users    @relation(fields: [userId], references: [id])
+  userId       String   @unique
+
+  @@map("sessions")
+}
+
+model Photo {
+  id     String @id @default(uuid())
+  userId String
+  user   Users  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  url    String
+
+  uploadedAt DateTime  @default(now())
+  comments   Comment[]
+
+  @@map("photo")
+}
+
+model Comment {
+  id          String   @id @default(uuid())
+  photoId     String
+  photo       Photo    @relation(fields: [photoId], references: [id], onDelete: Cascade)
+  userId      String
+  user        Users    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  content     String
+  commentedAt DateTime @default(now())
+
+  @@map("comment")
+}
