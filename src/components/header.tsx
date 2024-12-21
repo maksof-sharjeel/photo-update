@@ -79,7 +79,7 @@ const Header = () => {
                       await logoutUser({
                         sessionToken: token
                       })
-                      router.push('auth/login')
+                      router.push('/auth/login')
                     }
                   }}>
                     Sign out
