@@ -58,7 +58,7 @@ export function DataTable<TData, TValue>({ columns, data, pagination = true }: D
     <>
       <Card className="overflow-hidden rounded-none border-0 mb-5">
         <Table className=" bg-white">
-          <TableHeader className="pointer-events-none bg-gray-50 border-y border-gray-200">
+          {/* <TableHeader className="pointer-events-none bg-gray-50 border-y border-gray-200">
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
@@ -70,7 +70,7 @@ export function DataTable<TData, TValue>({ columns, data, pagination = true }: D
                 })}
               </TableRow>
             ))}
-          </TableHeader>
+          </TableHeader> */}
           <TableBody>
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
@@ -82,7 +82,7 @@ export function DataTable<TData, TValue>({ columns, data, pagination = true }: D
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={columns.length} className="h-24 text-center">
+                <TableCell colSpan={columns?.length ?? 0} className="h-24 text-center">
                   No results.
                 </TableCell>
               </TableRow>

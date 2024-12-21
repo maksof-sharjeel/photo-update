@@ -1,18 +1,16 @@
-import React from "react";
 import {
-  MapPin,
   Home,
-  Trash,
-  Coins,
-  Medal,
-  Settings,
+  Images,
   MapIcon,
+  MessageCircle
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 const sidebarItems = [
   { href: "/dashboard", label: "Dashboard", icon: Home },
   { href: "/dashboard/manage-uploads", label: "Upload Photo", icon: MapIcon },
+  { href: "/dashboard/add-comment", label: "Add Comments", icon: MessageCircle },
+  { href: "/dashboard/gallery", label: "Gallery", icon: Images },
  ];
 
 interface SidebarOpen {
